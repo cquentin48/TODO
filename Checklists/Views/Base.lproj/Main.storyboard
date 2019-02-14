@@ -34,7 +34,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9UX-W1-xNt">
                             <connections>
                                 <action selector="addDummyToDo:" destination="dc8-0G-pO2" id="exC-AI-fbX"/>
-                                <segue destination="g91-bA-kmS" kind="presentation" id="bfT-Bl-QKB"/>
+                                <segue destination="g91-bA-kmS" kind="presentation" identifier="addItem" id="bfT-Bl-QKB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
