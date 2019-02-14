@@ -103,6 +103,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textInput" destination="trf-BH-vh0" id="gH6-S9-rWz"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O3n-l7-JT3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
