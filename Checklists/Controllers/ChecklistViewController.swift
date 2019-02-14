@@ -65,3 +65,16 @@ class ChecklistViewController: UITableViewController {
     }
 }
 
+extension AddItemViewController:AddItemViewControllerDelegate{
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+        /*
+         * TODO Implementing
+         **/
+    }
+    
+    func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
+        /*
+         * TODO Implementing
+         */
+    }
+}
