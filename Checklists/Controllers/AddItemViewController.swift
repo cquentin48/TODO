@@ -10,6 +10,11 @@
 import Foundation
 import UIKit
 
+protocol AddItemViewControllerDelegate : class {
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController)
+    func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem)
+}
+
 class AddItemViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var textInput: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
