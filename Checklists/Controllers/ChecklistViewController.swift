@@ -40,7 +40,15 @@ class ChecklistViewController: UITableViewController {
         table.insertRows(at: [
             NSIndexPath(row: checkListItemsArray.count-1, section: 0) as IndexPath], with: .automatic)
         table.endUpdates()
-        //table.insertRows(at: NSIndexPath(row: checkListItemsArray.count-1, section: 0), with: .automatic)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "addItem"{
+            let destVC = segue.destination as! AddItemViewController
+            destVC.delegate = self
+        }
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -65,16 +73,14 @@ class ChecklistViewController: UITableViewController {
     }
 }
 
-extension AddItemViewController:AddItemViewControllerDelegate{
+extension ChecklistViewController:AddItemViewControllerDelegate{
     func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
-        /*
-         * TODO Implementing
-         **/
+        dismiss(animated: true, completion: nil)
     }
     
     func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
-        /*
-         * TODO Implementing
-         */
+        dismiss(animated: true, completion: nil)
     }
+    
+    
 }
