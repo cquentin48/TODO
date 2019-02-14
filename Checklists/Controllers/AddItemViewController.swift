@@ -15,6 +15,7 @@ class AddItemViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewWillAppear(true)
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -26,4 +27,7 @@ class AddItemViewController: UITableViewController {
         dismiss(animated: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        textInput.becomeFirstResponder()
+    }
 }
