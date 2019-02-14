@@ -10,6 +10,8 @@ import UIKit
 
 class ChecklistViewController: UITableViewController {
     var checkListItemsArray: [ChecklistItem] = []
+    @IBOutlet weak var button: UIBarButtonItem!
+    @IBOutlet var table: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,21 @@ class ChecklistViewController: UITableViewController {
         configureCheckmark(for: cell, withItem: item)
         //cell.accessoryType = (item.checked) ? .checkmark : .none
         return cell
+    }
+    @IBAction func addDummyToDo(_ sender: Any) {
+        checkListItemsArray.append(ChecklistItem(text: "Nouvel élément"))
+        table.beginUpdates()
+        table.insertRows(at: [
+            NSIndexPath(row: checkListItemsArray.count-1, section: 0) as IndexPath], with: .automatic)
+        table.endUpdates()
+        //table.insertRows(at: NSIndexPath(row: checkListItemsArray.count-1, section: 0), with: .automatic)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            checkListItemsArray.remove(at: indexPath.row)
+            table.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
     
     func configureCheckmark(for cell: UITableViewCell, withItem item: ChecklistItem){
