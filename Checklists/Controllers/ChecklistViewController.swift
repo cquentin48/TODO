@@ -43,6 +43,13 @@ class ChecklistViewController: UITableViewController {
         //table.insertRows(at: NSIndexPath(row: checkListItemsArray.count-1, section: 0), with: .automatic)
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            checkListItemsArray.remove(at: indexPath.row)
+            table.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
     func configureCheckmark(for cell: UITableViewCell, withItem item: ChecklistItem){
         cell.accessoryType = (item.checked) ? .checkmark : .none
     }
