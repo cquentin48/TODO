@@ -64,14 +64,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="trf-BH-vh0">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of the item" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="trf-BH-vh0">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="lWW-Sd-zvA"/>
                                                     </constraints>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="done:" destination="g91-bA-kmS" eventType="editingDidEndOnExit" id="7cH-M9-a7k"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -103,6 +106,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cancelButton" destination="YSE-s0-xkU" id="0wB-JJ-PPb"/>
+                        <outlet property="doneButton" destination="Ogv-FR-6P2" id="0Kh-9M-3xQ"/>
+                        <outlet property="textInput" destination="trf-BH-vh0" id="gH6-S9-rWz"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O3n-l7-JT3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
