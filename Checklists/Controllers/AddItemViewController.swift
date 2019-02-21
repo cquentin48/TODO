@@ -52,7 +52,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func done(_ sender: Any) {
         if(textInput.text != ""){
-            dismiss(animated: true)
+            delegate?.addItemViewController( self,  didFinishAddingItem: ChecklistItem(text: textInput.text!))
         }else{
             
         }
