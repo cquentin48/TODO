@@ -57,7 +57,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func done(_ sender: Any) {
         if(textInput.text != ""){
-            if(!isEditing){
+            if(itemToEdit == nil){
                 delegate?.itemDetailViewController(self, didFinishAddingItem: ChecklistItem(text: textInput.text!))
             }else{
                 delegate?.itemDetailViewController(self, didFinishEditingItem: ChecklistItem(text: textInput.text!,checked: (itemToEdit?.checked)!), indexAt: index)
@@ -74,7 +74,6 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             textInput.text = itemToEdit.text
             self.title = "Edition de l'élément"
             self.doneButton.isEnabled = true
-            self.isEditing = true
         } else {
             self.title = "Ajout d'un élément"
         }
