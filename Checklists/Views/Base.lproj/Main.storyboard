@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" id="2Mk-X5-b5p">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" id="2Mk-X5-b5p" customClass="ChecklistItemCell" customModule="Checklists" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Mk-X5-b5p" id="nTX-kN-Xl9">
@@ -50,6 +50,10 @@
                                         <constraint firstAttribute="bottom" secondItem="zhS-Z3-8h7" secondAttribute="bottom" constant="11" id="puH-yv-EEK"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="checkListName" destination="wDS-gE-iRv" id="sZ1-xZ-wPg"/>
+                                    <outlet property="isChecked" destination="zhS-Z3-8h7" id="Xfw-HX-mCm"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>

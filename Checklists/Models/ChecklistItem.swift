@@ -13,12 +13,12 @@ class ChecklistItem {
     var checked:Bool
     
     public init(text:String, checked:Bool){
-        self.text = text
+        self.text = ""
         self.checked = checked
     }
     
     public init(text:String){
-        self.text = text
+        self.text = ""
         self.checked = false
     }
     
