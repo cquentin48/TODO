@@ -8,12 +8,19 @@
 
 import UIKit
 
+protocol AllItemsDelegate : class {
+    func itemViewControllerDidCancel(_ controller: ItemDetailViewController)
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem)
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem, indexAt: Int)
+}
+
 class ChecklistViewController: UITableViewController {
     var checkListItemsArray: [ChecklistItem] = []
     @IBOutlet weak var button: UIBarButtonItem!
     @IBOutlet var table: UITableView!
     @IBOutlet weak var checkBoxLabel: UILabel!
     var rawInput:String?
+    var delegate:AllItemsDelegate?
     
     static var documentDirectory:URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -117,7 +124,6 @@ class ChecklistViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         checkListItemsArray[indexPath.row].toggleChecked()
-        //tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
@@ -125,6 +131,7 @@ class ChecklistViewController: UITableViewController {
 extension ChecklistViewController:ItemDetailViewControllerDelegate{
     func itemViewControllerDidCancel(_ controller: ItemDetailViewController) {
         dismiss(animated: true, completion: nil)
+        saveChecklistItems()
     }
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem) {
