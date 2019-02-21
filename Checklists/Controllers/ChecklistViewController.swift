@@ -16,8 +16,8 @@ class ChecklistViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkListItemsArray.append(ChecklistItem(text: "IOS"))
-        checkListItemsArray.append(ChecklistItem(text: "Android Studio",checked: true))
-        checkListItemsArray.append(ChecklistItem(text: "Javascript",checked: true))
+        checkListItemsArray.append(ChecklistItem(text: "Android Studio"))
+        checkListItemsArray.append(ChecklistItem(text: "Javascript"))
         checkListItemsArray.append(ChecklistItem(text: "WebServices"))
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -80,6 +80,10 @@ extension ChecklistViewController:AddItemViewControllerDelegate{
     }
     
     func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
+        checkListItemsArray.append(ChecklistItem(text: item.text))
+        table.beginUpdates()
+        table.insertRows(at: [IndexPath(row: checkListItemsArray.count-1, section: 0)], with: .automatic)
+        table.endUpdates()
         dismiss(animated: true, completion: nil)
     }
     
