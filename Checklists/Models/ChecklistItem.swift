@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChecklistItem {
+class ChecklistItem : Codable {
     var text:String
     var checked:Bool
     
@@ -29,4 +29,9 @@ class ChecklistItem {
             checked = true
         }
     }
+}
+
+//MARK : Protocol Codable
+protocol Codable {
+    
 }
