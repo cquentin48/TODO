@@ -56,11 +56,11 @@ class ChecklistViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "addItem"{
             let navVC = segue.destination as! UINavigationController
-            let destVC = navVC.viewControllers.first as! AddItemViewController
+            let destVC = navVC.viewControllers.first as! ItemDetailViewController
             destVC.delegate = self
         } else if segue.identifier == "editItem"{
             let navVC = segue.destination as! UINavigationController
-            let destVC = navVC.viewControllers.first as! AddItemViewController
+            let destVC = navVC.viewControllers.first as! ItemDetailViewController
             destVC.delegate = self
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
             destVC.itemToEdit = checkListItemsArray[indexPath.row]
@@ -90,12 +90,12 @@ class ChecklistViewController: UITableViewController {
     }
 }
 
-extension ChecklistViewController:AddItemViewControllerDelegate{
-    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+extension ChecklistViewController:ItemDetailViewControllerDelegate{
+    func itemViewControllerDidCancel(_ controller: ItemDetailViewController) {
         dismiss(animated: true, completion: nil)
     }
     
-    func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem) {
         table.beginUpdates()
         checkListItemsArray.append(ChecklistItem(text: item.text))
         table.insertRows(at: [IndexPath(row: checkListItemsArray.count-1, section: 0)], with: .automatic)
@@ -103,7 +103,7 @@ extension ChecklistViewController:AddItemViewControllerDelegate{
         dismiss(animated: true, completion: nil)
     }
     
-    func addItemViewController(_ controller: AddItemViewController, didFinishEditingItem item: ChecklistItem, indexAt:Int){
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem, indexAt:Int){
         table.beginUpdates()
         checkListItemsArray[indexAt] = item
         

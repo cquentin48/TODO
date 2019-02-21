@@ -10,13 +10,13 @@
 import Foundation
 import UIKit
 
-protocol AddItemViewControllerDelegate : class {
-    func addItemViewControllerDidCancel(_ controller: AddItemViewController)
-    func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem)
-    func addItemViewController(_ controller: AddItemViewController, didFinishEditingItem item: ChecklistItem, indexAt: Int)
+protocol ItemDetailViewControllerDelegate : class {
+    func itemViewControllerDidCancel(_ controller: ItemDetailViewController)
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem)
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem, indexAt: Int)
 }
 
-class AddItemViewController: UITableViewController, UITextFieldDelegate {
+class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var textInput: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
@@ -24,7 +24,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     var index:Int = 0
     
     var itemToEdit: ChecklistItem?
-    var delegate:AddItemViewControllerDelegate?
+    var delegate:ItemDetailViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     
     func addDelegateForTextInput(){
         textInput?.delegate = self
-        textInput?.addTarget(self, action: #selector(AddItemViewController.updateButtonBarStatus), for: .editingChanged)
+        textInput?.addTarget(self, action: #selector(ItemDetailViewController.updateButtonBarStatus), for: .editingChanged)
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -58,9 +58,9 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func done(_ sender: Any) {
         if(textInput.text != ""){
             if(!isEditing){
-                delegate?.addItemViewController(self, didFinishAddingItem: ChecklistItem(text: textInput.text!))
+                delegate?.itemDetailViewController(self, didFinishAddingItem: ChecklistItem(text: textInput.text!))
             }else{
-                delegate?.addItemViewController(self, didFinishEditingItem: ChecklistItem(text: textInput.text!,checked: (itemToEdit?.checked)!), indexAt: index)
+                delegate?.itemDetailViewController(self, didFinishEditingItem: ChecklistItem(text: textInput.text!,checked: (itemToEdit?.checked)!), indexAt: index)
             }
             
         }else{
