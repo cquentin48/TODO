@@ -53,7 +53,7 @@
                                 <connections>
                                     <outlet property="checkListName" destination="wDS-gE-iRv" id="sZ1-xZ-wPg"/>
                                     <outlet property="isChecked" destination="zhS-Z3-8h7" id="Xfw-HX-mCm"/>
-                                    <segue destination="uFd-co-ElD" kind="presentation" identifier="editItem" trigger="accessoryAction" modalTransitionStyle="flipHorizontal" id="Mg1-4n-zbz"/>
+                                    <segue destination="uFd-co-ElD" kind="presentation" identifier="editItem" trigger="accessoryAction" id="Mg1-4n-zbz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -86,15 +86,15 @@
                         <sections>
                             <tableViewSection id="XzE-bV-XVO">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kig-vt-DsO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kig-vt-DsO">
                                         <rect key="frame" x="0.0" y="35" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kig-vt-DsO" id="bdV-33-8Cy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of the item" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="trf-BH-vh0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="50.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="lWW-Sd-zvA"/>
                                                     </constraints>

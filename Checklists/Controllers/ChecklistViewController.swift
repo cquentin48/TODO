@@ -13,6 +13,16 @@ class ChecklistViewController: UITableViewController {
     @IBOutlet weak var button: UIBarButtonItem!
     @IBOutlet var table: UITableView!
     @IBOutlet weak var checkBoxLabel: UILabel!
+    var rawInput:String?
+    
+    func getElementByInputText(inputElement: ChecklistItem)-> Int{
+        for i in 0...checkListItemsArray.count-1 {
+            if checkListItemsArray[i].text == inputElement.text{
+                return i
+            }
+        }
+        return -1
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +41,6 @@ class ChecklistViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistItem", for: indexPath) as! ChecklistItemCell
         let item = checkListItemsArray[indexPath.row]
         cell.initCell(inputCheckList: item)
-        //configureText(for: cell, withItem: item)
-        //configureCheckmark(for: cell, withItem: item)
         return cell
     }
     @IBAction func addDummyToDo(_ sender: Any) {
@@ -54,7 +62,9 @@ class ChecklistViewController: UITableViewController {
             let navVC = segue.destination as! UINavigationController
             let destVC = navVC.viewControllers.first as! AddItemViewController
             destVC.delegate = self
-            destVC.editElement = "editItem"
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
+            destVC.itemToEdit = checkListItemsArray[indexPath.row]
+            destVC.index = indexPath.row
         }
     }
     
@@ -86,12 +96,19 @@ extension ChecklistViewController:AddItemViewControllerDelegate{
     }
     
     func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
-        checkListItemsArray.append(ChecklistItem(text: item.text))
         table.beginUpdates()
+        checkListItemsArray.append(ChecklistItem(text: item.text))
         table.insertRows(at: [IndexPath(row: checkListItemsArray.count-1, section: 0)], with: .automatic)
         table.endUpdates()
         dismiss(animated: true, completion: nil)
     }
     
-    
+    func addItemViewController(_ controller: AddItemViewController, didFinishEditingItem item: ChecklistItem, indexAt:Int){
+        table.beginUpdates()
+        checkListItemsArray[indexAt] = item
+        
+        table.reloadRows(at: [IndexPath(row: indexAt, section: 0)], with: .automatic)
+        table.endUpdates()
+        dismiss(animated: true, completion: nil)
+    }
 }

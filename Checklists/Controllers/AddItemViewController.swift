@@ -13,24 +13,27 @@ import UIKit
 protocol AddItemViewControllerDelegate : class {
     func addItemViewControllerDidCancel(_ controller: AddItemViewController)
     func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem)
+    func addItemViewController(_ controller: AddItemViewController, didFinishEditingItem item: ChecklistItem, indexAt: Int)
 }
 
 class AddItemViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var textInput: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
-    var editElement: String = ""
+    
+    var index:Int = 0
+    
+    var itemToEdit: ChecklistItem?
     var delegate:AddItemViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewWillAppear(true)
         initStateForBarButtons()
         updateButtonBarStatus()
     }
     
     func initStateForBarButtons(){
-        textInput.text = editElement
+        textInput.text = ""
         doneButton.isEnabled = false
         addDelegateForTextInput()
     }
@@ -54,13 +57,27 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func done(_ sender: Any) {
         if(textInput.text != ""){
-            delegate?.addItemViewController( self,  didFinishAddingItem: ChecklistItem(text: textInput.text!))
+            if(!isEditing){
+                delegate?.addItemViewController(self, didFinishAddingItem: ChecklistItem(text: textInput.text!))
+            }else{
+                delegate?.addItemViewController(self, didFinishEditingItem: ChecklistItem(text: textInput.text!,checked: (itemToEdit?.checked)!), indexAt: index)
+            }
+            
         }else{
             
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if let itemToEdit = itemToEdit {
+            //Mode edition
+            textInput.text = itemToEdit.text
+            self.title = "Edition de l'élément"
+            self.doneButton.isEnabled = true
+            self.isEditing = true
+        } else {
+            self.title = "Ajout d'un élément"
+        }
         textInput.becomeFirstResponder()
     }
 }
