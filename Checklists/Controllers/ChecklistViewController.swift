@@ -50,6 +50,10 @@ class ChecklistViewController: UITableViewController {
             let navVC = segue.destination as! UINavigationController
             let destVC = navVC.viewControllers.first as! AddItemViewController
             destVC.delegate = self
+        } else if segue.identifier == "editItem"{
+            let navVC = segue.destination as! UINavigationController
+            let destVC = navVC.viewControllers.first as! AddItemViewController
+            destVC.delegate = self
         }
     }
     

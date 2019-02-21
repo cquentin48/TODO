@@ -53,6 +53,7 @@
                                 <connections>
                                     <outlet property="checkListName" destination="wDS-gE-iRv" id="sZ1-xZ-wPg"/>
                                     <outlet property="isChecked" destination="zhS-Z3-8h7" id="Xfw-HX-mCm"/>
+                                    <segue destination="uFd-co-ElD" kind="presentation" identifier="editItem" id="fnk-gl-FPA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -181,4 +182,7 @@
             <point key="canvasLocation" x="277.60000000000002" y="25.637181409295355"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fnk-gl-FPA"/>
+    </inferredMetricsTieBreakers>
 </document>
