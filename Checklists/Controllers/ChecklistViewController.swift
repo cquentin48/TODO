@@ -31,7 +31,20 @@ class ChecklistViewController: UITableViewController {
             let jsonData = try encoder.encode(checkListItemsArray)
             try jsonData.write(to: ChecklistViewController.dataFileUrl)
         }
-        catch{
+        catch{}
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        loadChecklistItems()
+    }
+    
+    func loadChecklistItems(){
+        do{
+            let importedData = try Data(contentsOf: ChecklistViewController.dataFileUrl)
+            checkListItemsArray = try JSONDecoder().decode([ChecklistItem].self, from: importedData)
+            dump(checkListItemsArray)
+        }catch{
             
         }
         
@@ -50,11 +63,6 @@ class ChecklistViewController: UITableViewController {
         super.viewDidLoad()
         print(ChecklistViewController.documentDirectory.path)
         print(ChecklistViewController.dataFileUrl.path)
-        checkListItemsArray.append(ChecklistItem(text: "IOS", checked: true))
-        checkListItemsArray.append(ChecklistItem(text: "Android Studio"))
-        checkListItemsArray.append(ChecklistItem(text: "Javascript", checked: true))
-        checkListItemsArray.append(ChecklistItem(text: "WebServices"))
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
