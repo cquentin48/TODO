@@ -16,8 +16,8 @@ class ChecklistViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkListItemsArray.append(ChecklistItem(text: "IOS"))
-        checkListItemsArray.append(ChecklistItem(text: "Android Studio",checked: true))
-        checkListItemsArray.append(ChecklistItem(text: "Javascript",checked: true))
+        checkListItemsArray.append(ChecklistItem(text: "Android Studio"))
+        checkListItemsArray.append(ChecklistItem(text: "Javascript"))
         checkListItemsArray.append(ChecklistItem(text: "WebServices"))
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -40,7 +40,16 @@ class ChecklistViewController: UITableViewController {
         table.insertRows(at: [
             NSIndexPath(row: checkListItemsArray.count-1, section: 0) as IndexPath], with: .automatic)
         table.endUpdates()
-        //table.insertRows(at: NSIndexPath(row: checkListItemsArray.count-1, section: 0), with: .automatic)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "addItem"{
+            let navVC = segue.destination as! UINavigationController
+            let destVC = navVC.viewControllers.first as! AddItemViewController
+            destVC.delegate = self
+        }
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -65,3 +74,18 @@ class ChecklistViewController: UITableViewController {
     }
 }
 
+extension ChecklistViewController:AddItemViewControllerDelegate{
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
+        checkListItemsArray.append(ChecklistItem(text: item.text))
+        table.beginUpdates()
+        table.insertRows(at: [IndexPath(row: checkListItemsArray.count-1, section: 0)], with: .automatic)
+        table.endUpdates()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+}

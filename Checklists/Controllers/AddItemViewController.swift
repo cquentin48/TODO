@@ -10,10 +10,16 @@
 import Foundation
 import UIKit
 
+protocol AddItemViewControllerDelegate : class {
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController)
+    func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem)
+}
+
 class AddItemViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var textInput: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    var delegate:AddItemViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +52,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func done(_ sender: Any) {
         if(textInput.text != ""){
-            dismiss(animated: true)
+            delegate?.addItemViewController( self,  didFinishAddingItem: ChecklistItem(text: textInput.text!))
         }else{
             
         }
