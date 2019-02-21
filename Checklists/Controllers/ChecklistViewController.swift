@@ -15,6 +15,41 @@ class ChecklistViewController: UITableViewController {
     @IBOutlet weak var checkBoxLabel: UILabel!
     var rawInput:String?
     
+    static var documentDirectory:URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+    
+    static var dataFileUrl:URL {
+        return documentDirectory.appendingPathComponent("CheckLists").appendingPathExtension("json")
+    }
+    
+    func saveChecklistItems(){
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        do{
+            let jsonData = try encoder.encode(checkListItemsArray)
+            try jsonData.write(to: ChecklistViewController.dataFileUrl)
+        }
+        catch{}
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        loadChecklistItems()
+    }
+    
+    func loadChecklistItems(){
+        do{
+            let importedData = try Data(contentsOf: ChecklistViewController.dataFileUrl)
+            checkListItemsArray = try JSONDecoder().decode([ChecklistItem].self, from: importedData)
+            dump(checkListItemsArray)
+        }catch{
+            
+        }
+        
+    }
+    
     func getElementByInputText(inputElement: ChecklistItem)-> Int{
         for i in 0...checkListItemsArray.count-1 {
             if checkListItemsArray[i].text == inputElement.text{
@@ -26,17 +61,14 @@ class ChecklistViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkListItemsArray.append(ChecklistItem(text: "IOS", checked: true))
-        checkListItemsArray.append(ChecklistItem(text: "Android Studio"))
-        checkListItemsArray.append(ChecklistItem(text: "Javascript", checked: true))
-        checkListItemsArray.append(ChecklistItem(text: "WebServices"))
-        // Do any additional setup after loading the view, typically from a nib.
+        print(ChecklistViewController.documentDirectory.path)
+        print(ChecklistViewController.dataFileUrl.path)
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return checkListItemsArray.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistItem", for: indexPath) as! ChecklistItemCell
         let item = checkListItemsArray[indexPath.row]
@@ -72,6 +104,7 @@ class ChecklistViewController: UITableViewController {
         if editingStyle == .delete {
             checkListItemsArray.remove(at: indexPath.row)
             table.deleteRows(at: [indexPath], with: .automatic)
+            saveChecklistItems()
         }
     }
     
@@ -101,6 +134,7 @@ extension ChecklistViewController:ItemDetailViewControllerDelegate{
         table.insertRows(at: [IndexPath(row: checkListItemsArray.count-1, section: 0)], with: .automatic)
         table.endUpdates()
         dismiss(animated: true, completion: nil)
+        saveChecklistItems()
     }
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem, indexAt:Int){
@@ -110,5 +144,6 @@ extension ChecklistViewController:ItemDetailViewControllerDelegate{
         table.reloadRows(at: [IndexPath(row: indexAt, section: 0)], with: .automatic)
         table.endUpdates()
         dismiss(animated: true, completion: nil)
+        saveChecklistItems()
     }
 }

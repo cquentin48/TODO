@@ -8,25 +8,17 @@
 
 import Foundation
 
-class ChecklistItem {
+class ChecklistItem : Codable {
     var text:String
     var checked:Bool
     
-    public init(text:String, checked:Bool){
+    public init(text:String, checked:Bool = false){
         self.text = text
         self.checked = checked
     }
     
-    public init(text:String){
-        self.text = text
-        self.checked = false
-    }
-    
-    public func toggleChecked(){
-        if(checked == true){
-            checked = false
-        }else{
-            checked = true
-        }
+    func toggleChecked(){
+        checked = !checked
     }
 }
+
