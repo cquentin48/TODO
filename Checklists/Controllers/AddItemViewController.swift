@@ -19,6 +19,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var textInput: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    var editElement: String = ""
     var delegate:AddItemViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -29,6 +30,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func initStateForBarButtons(){
+        textInput.text = editElement
         doneButton.isEnabled = false
         addDelegateForTextInput()
     }

@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" id="2Mk-X5-b5p" customClass="ChecklistItemCell" customModule="Checklists" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" editingAccessoryType="detailDisclosureButton" id="2Mk-X5-b5p" customClass="ChecklistItemCell" customModule="Checklists" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Mk-X5-b5p" id="nTX-kN-Xl9">
@@ -35,7 +35,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDS-gE-iRv">
-                                            <rect key="frame" x="55" y="11.5" width="244" height="21"/>
+                                            <rect key="frame" x="47" y="11.5" width="252" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -44,7 +44,7 @@
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="wDS-gE-iRv" secondAttribute="trailing" id="4UL-ez-8MZ"/>
                                         <constraint firstItem="zhS-Z3-8h7" firstAttribute="leading" secondItem="nTX-kN-Xl9" secondAttribute="leadingMargin" id="5Sp-d5-wp2"/>
-                                        <constraint firstItem="wDS-gE-iRv" firstAttribute="leading" secondItem="zhS-Z3-8h7" secondAttribute="trailing" constant="16" id="9b8-hO-egW"/>
+                                        <constraint firstItem="wDS-gE-iRv" firstAttribute="leading" secondItem="zhS-Z3-8h7" secondAttribute="trailing" constant="8" id="9b8-hO-egW"/>
                                         <constraint firstItem="wDS-gE-iRv" firstAttribute="centerY" secondItem="nTX-kN-Xl9" secondAttribute="centerY" id="Wry-zC-ddy"/>
                                         <constraint firstItem="zhS-Z3-8h7" firstAttribute="top" secondItem="nTX-kN-Xl9" secondAttribute="top" constant="11" id="fOA-Vr-vuV"/>
                                         <constraint firstAttribute="bottom" secondItem="zhS-Z3-8h7" secondAttribute="bottom" constant="11" id="puH-yv-EEK"/>
@@ -53,7 +53,7 @@
                                 <connections>
                                     <outlet property="checkListName" destination="wDS-gE-iRv" id="sZ1-xZ-wPg"/>
                                     <outlet property="isChecked" destination="zhS-Z3-8h7" id="Xfw-HX-mCm"/>
-                                    <segue destination="uFd-co-ElD" kind="presentation" identifier="editItem" id="fnk-gl-FPA"/>
+                                    <segue destination="uFd-co-ElD" kind="presentation" identifier="editItem" trigger="accessoryAction" modalTransitionStyle="flipHorizontal" id="Mg1-4n-zbz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -183,6 +183,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fnk-gl-FPA"/>
+        <segue reference="Mg1-4n-zbz"/>
     </inferredMetricsTieBreakers>
 </document>

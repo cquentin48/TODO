@@ -16,9 +16,9 @@ class ChecklistViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkListItemsArray.append(ChecklistItem(text: "IOS"))
+        checkListItemsArray.append(ChecklistItem(text: "IOS", checked: true))
         checkListItemsArray.append(ChecklistItem(text: "Android Studio"))
-        checkListItemsArray.append(ChecklistItem(text: "Javascript"))
+        checkListItemsArray.append(ChecklistItem(text: "Javascript", checked: true))
         checkListItemsArray.append(ChecklistItem(text: "WebServices"))
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -28,11 +28,11 @@ class ChecklistViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistItem", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistItem", for: indexPath) as! ChecklistItemCell
         let item = checkListItemsArray[indexPath.row]
-        configureText(for: cell, withItem: item)
-        configureCheckmark(for: cell, withItem: item)
-        //cell.accessoryType = (item.checked) ? .checkmark : .none
+        cell.initCell(inputCheckList: item)
+        //configureText(for: cell, withItem: item)
+        //configureCheckmark(for: cell, withItem: item)
         return cell
     }
     @IBAction func addDummyToDo(_ sender: Any) {
@@ -54,6 +54,7 @@ class ChecklistViewController: UITableViewController {
             let navVC = segue.destination as! UINavigationController
             let destVC = navVC.viewControllers.first as! AddItemViewController
             destVC.delegate = self
+            destVC.editElement = "editItem"
         }
     }
     

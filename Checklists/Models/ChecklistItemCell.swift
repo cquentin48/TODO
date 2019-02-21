@@ -22,5 +22,13 @@ class ChecklistItemCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func initCell(inputCheckList: ChecklistItem){
+        checkListName.text = inputCheckList.text
+        if(inputCheckList.checked){
+            isChecked.text = "✓"
+        }else{
+            isChecked.text = "𐄂"
+        }
+    }
 }
