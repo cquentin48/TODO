@@ -11,15 +11,15 @@ import UIKit
 class AllListViewController: UITableViewController {
 
     @IBOutlet var tableEntryItemView: UITableView!
-    private var listArray:[String]?
+    private var checkListArray = [Checklist]()
     @IBOutlet weak var cell: UITableViewCell!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.listArray = [String]()
-        listArray!.append("List 1")
-        listArray!.append("List 2")
-        listArray!.append("List 3")
+        checkListArray.append(Checklist(name:"Birthdays"))
+        checkListArray.append(Checklist(name:"Groceries"))
+        checkListArray.append(Checklist(name:"Cool Apps"))
+        checkListArray.append(Checklist(name:"To Do"))
     }
     
     override func viewDidLoad() {
@@ -29,13 +29,13 @@ class AllListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (listArray?.count)!
+        return (checkListArray.count)
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListItemList", for: indexPath)
-        let item = listArray![indexPath.row]
+        let item = checkListArray[indexPath.row].name
         cell.textLabel?.text = item
         return cell
     }
