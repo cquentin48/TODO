@@ -12,6 +12,7 @@ class ChecklistViewController: UITableViewController {
     var checkListItemsArray: [ChecklistItem] = []
     @IBOutlet weak var button: UIBarButtonItem!
     @IBOutlet var table: UITableView!
+    @IBOutlet weak var checkBoxLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()

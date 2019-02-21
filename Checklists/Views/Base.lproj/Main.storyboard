@@ -26,24 +26,28 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhS-Z3-8h7">
-                                            <rect key="frame" x="4" y="11" width="15" height="21.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="16" y="11" width="23" height="21.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="23" id="Vmi-8k-MFt"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDS-gE-iRv">
-                                            <rect key="frame" x="35" y="12" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDS-gE-iRv">
+                                            <rect key="frame" x="55" y="11.5" width="244" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="wDS-gE-iRv" secondAttribute="trailing" id="4UL-ez-8MZ"/>
+                                        <constraint firstItem="zhS-Z3-8h7" firstAttribute="leading" secondItem="nTX-kN-Xl9" secondAttribute="leadingMargin" id="5Sp-d5-wp2"/>
                                         <constraint firstItem="wDS-gE-iRv" firstAttribute="leading" secondItem="zhS-Z3-8h7" secondAttribute="trailing" constant="16" id="9b8-hO-egW"/>
-                                        <constraint firstItem="zhS-Z3-8h7" firstAttribute="leading" secondItem="nTX-kN-Xl9" secondAttribute="leading" constant="2" id="GSW-EL-W7Q"/>
+                                        <constraint firstItem="wDS-gE-iRv" firstAttribute="centerY" secondItem="nTX-kN-Xl9" secondAttribute="centerY" id="Wry-zC-ddy"/>
                                         <constraint firstItem="zhS-Z3-8h7" firstAttribute="top" secondItem="nTX-kN-Xl9" secondAttribute="top" constant="11" id="fOA-Vr-vuV"/>
                                         <constraint firstAttribute="bottom" secondItem="zhS-Z3-8h7" secondAttribute="bottom" constant="11" id="puH-yv-EEK"/>
-                                        <constraint firstItem="zhS-Z3-8h7" firstAttribute="leading" secondItem="nTX-kN-Xl9" secondAttribute="leading" constant="4" id="xHg-Kk-Gsz"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
