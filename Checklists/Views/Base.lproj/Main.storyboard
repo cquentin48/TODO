@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" id="2Mk-X5-b5p">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" editingAccessoryType="detailDisclosureButton" id="2Mk-X5-b5p" customClass="ChecklistItemCell" customModule="Checklists" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Mk-X5-b5p" id="nTX-kN-Xl9">
@@ -26,26 +26,35 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhS-Z3-8h7">
-                                            <rect key="frame" x="4" y="11" width="15" height="21.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="16" y="11" width="23" height="21.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="23" id="Vmi-8k-MFt"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDS-gE-iRv">
-                                            <rect key="frame" x="35" y="12" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDS-gE-iRv">
+                                            <rect key="frame" x="47" y="11.5" width="252" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="wDS-gE-iRv" firstAttribute="leading" secondItem="zhS-Z3-8h7" secondAttribute="trailing" constant="16" id="9b8-hO-egW"/>
-                                        <constraint firstItem="zhS-Z3-8h7" firstAttribute="leading" secondItem="nTX-kN-Xl9" secondAttribute="leading" constant="2" id="GSW-EL-W7Q"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="wDS-gE-iRv" secondAttribute="trailing" id="4UL-ez-8MZ"/>
+                                        <constraint firstItem="zhS-Z3-8h7" firstAttribute="leading" secondItem="nTX-kN-Xl9" secondAttribute="leadingMargin" id="5Sp-d5-wp2"/>
+                                        <constraint firstItem="wDS-gE-iRv" firstAttribute="leading" secondItem="zhS-Z3-8h7" secondAttribute="trailing" constant="8" id="9b8-hO-egW"/>
+                                        <constraint firstItem="wDS-gE-iRv" firstAttribute="centerY" secondItem="nTX-kN-Xl9" secondAttribute="centerY" id="Wry-zC-ddy"/>
                                         <constraint firstItem="zhS-Z3-8h7" firstAttribute="top" secondItem="nTX-kN-Xl9" secondAttribute="top" constant="11" id="fOA-Vr-vuV"/>
                                         <constraint firstAttribute="bottom" secondItem="zhS-Z3-8h7" secondAttribute="bottom" constant="11" id="puH-yv-EEK"/>
-                                        <constraint firstItem="zhS-Z3-8h7" firstAttribute="leading" secondItem="nTX-kN-Xl9" secondAttribute="leading" constant="4" id="xHg-Kk-Gsz"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="checkListName" destination="wDS-gE-iRv" id="sZ1-xZ-wPg"/>
+                                    <outlet property="isChecked" destination="zhS-Z3-8h7" id="Xfw-HX-mCm"/>
+                                    <segue destination="uFd-co-ElD" kind="presentation" identifier="editItem" trigger="accessoryAction" id="Mg1-4n-zbz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -77,15 +86,15 @@
                         <sections>
                             <tableViewSection id="XzE-bV-XVO">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kig-vt-DsO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kig-vt-DsO">
                                         <rect key="frame" x="0.0" y="35" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kig-vt-DsO" id="bdV-33-8Cy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of the item" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="trf-BH-vh0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="50.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="lWW-Sd-zvA"/>
                                                     </constraints>
@@ -173,4 +182,7 @@
             <point key="canvasLocation" x="277.60000000000002" y="25.637181409295355"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Mg1-4n-zbz"/>
+    </inferredMetricsTieBreakers>
 </document>
