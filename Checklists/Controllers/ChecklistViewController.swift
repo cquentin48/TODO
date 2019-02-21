@@ -15,6 +15,14 @@ class ChecklistViewController: UITableViewController {
     @IBOutlet weak var checkBoxLabel: UILabel!
     var rawInput:String?
     
+    var documentDirectory:URL{
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+    
+    var dataFileUrl:URL{
+        return documentDirectory.appendingPathComponent("CheckLists").appendingPathExtension(".json")
+    }
+    
     func getElementByInputText(inputElement: ChecklistItem)-> Int{
         for i in 0...checkListItemsArray.count-1 {
             if checkListItemsArray[i].text == inputElement.text{
@@ -26,10 +34,13 @@ class ChecklistViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(documentDirectory.absoluteString)
+        print(documentDirectory.absoluteURL)
         checkListItemsArray.append(ChecklistItem(text: "IOS", checked: true))
         checkListItemsArray.append(ChecklistItem(text: "Android Studio"))
         checkListItemsArray.append(ChecklistItem(text: "Javascript", checked: true))
         checkListItemsArray.append(ChecklistItem(text: "WebServices"))
+        print(documentDirectory.absoluteString)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
