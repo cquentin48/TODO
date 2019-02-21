@@ -43,7 +43,6 @@ class ChecklistViewController: UITableViewController {
         do{
             let importedData = try Data(contentsOf: ChecklistViewController.dataFileUrl)
             checkListItemsArray = try JSONDecoder().decode([ChecklistItem].self, from: importedData)
-            dump(checkListItemsArray)
         }catch{
             
         }
