@@ -19,6 +19,10 @@ class AllListViewController: UITableViewController {
         checkListArray.append(Checklist(name:"Groceries"))
         checkListArray.append(Checklist(name:"Cool Apps"))
         checkListArray.append(Checklist(name:"To Do"))
+        
+        checkListArray.forEach { (it) in
+            it.items.append(ChecklistItem(text: "New Element", checked: false))
+        }
     }
     
     override func viewDidLoad() {
@@ -30,7 +34,6 @@ class AllListViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return (checkListArray.count)
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListItemList", for: indexPath)
@@ -45,8 +48,9 @@ class AllListViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showElement" {
             let destVC = segue.destination as! ChecklistViewController
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
             destVC.delegate = self
-            destVC.checkListItemsArray = destVC.loadChecklistItems()
+            destVC.checkListItemsArray = checkListArray[indexPath.row].items
         }else if segue.identifier == "addCategoryItem"{
             let navVC = segue.destination as! UINavigationController
             let destVC = navVC.viewControllers.first as! ListDetailViewController
