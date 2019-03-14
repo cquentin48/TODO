@@ -10,6 +10,7 @@ import UIKit
 let ModelData = DataModel()
 class DataModel{
     var checkListArray:[Checklist] = [Checklist]()
+    var iconListArray:[IconAsset] = [IconAsset]()
     
     static var documentDirectory:URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -44,6 +45,7 @@ class DataModel{
                                                selector: #selector(save),
                                                 name: UIApplication.didEnterBackgroundNotification,
                                                 object: nil)
+        iconListArray = initIconArrayList()
     }
     
     func sortCheckList(){
@@ -51,5 +53,19 @@ class DataModel{
         checkListArray.forEach { (singleCheckList) in
             singleCheckList.items = singleCheckList.items.sorted {$0.text.lowercased() < $1.text.lowercased()}
         }
+    }
+    
+    func initIconArrayList()->[IconAsset]{
+        var iconArrayList = [IconAsset]()
+        iconArrayList.append(IconAsset.Birthdays)
+        iconArrayList.append(IconAsset.Chores)
+        iconArrayList.append(IconAsset.Drinks)
+        iconArrayList.append(IconAsset.Folder)
+        iconArrayList.append(IconAsset.Groceries)
+        iconArrayList.append(IconAsset.Inbox)
+        iconArrayList.append(IconAsset.NoIcon)
+        iconArrayList.append(IconAsset.Photos)
+        iconArrayList.append(IconAsset.Trips)
+        return iconArrayList
     }
 }
