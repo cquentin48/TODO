@@ -19,7 +19,7 @@ class DataModel{
         return documentDirectory.appendingPathComponent("CheckLists").appendingPathExtension("json")
     }
     
-    func save(){
+    @objc func save(){
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         do{
@@ -39,5 +39,9 @@ class DataModel{
     
     init(){
         load()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(save),
+                                                name: UIApplication.didEnterBackgroundNotification,
+                                                object: nil)
     }
 }
