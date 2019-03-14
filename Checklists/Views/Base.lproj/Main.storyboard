@@ -321,6 +321,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <connections>
+                                                        <action selector="titleChanged:" destination="igj-U9-Lcn" eventType="editingChanged" id="gZE-fW-HD4"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -390,6 +393,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="categoryIcon" destination="LJ0-2f-pA3" id="BQP-ZJ-CXA"/>
+                        <outlet property="doneButton" destination="lL5-gi-LAd" id="15V-yr-rZW"/>
                         <outlet property="textInput" destination="yM2-mL-YUv" id="v3X-06-dPi"/>
                     </connections>
                 </tableViewController>
