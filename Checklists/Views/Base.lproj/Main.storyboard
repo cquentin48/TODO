@@ -62,7 +62,6 @@
                     <navigationItem key="navigationItem" title="Checklist" id="FFn-UK-vXp">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9UX-W1-xNt">
                             <connections>
-                                <action selector="addDummyToDo:" destination="dc8-0G-pO2" id="exC-AI-fbX"/>
                                 <segue destination="uFd-co-ElD" kind="presentation" identifier="addItem" id="bfT-Bl-QKB"/>
                             </connections>
                         </barButtonItem>

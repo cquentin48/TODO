@@ -16,19 +16,16 @@ class AllListViewController: UITableViewController {
         super.init(coder: aDecoder)
     }
     
-    static var documentDirectory:URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    }
-    
-    static var dataFileUrl:URL {
-        return documentDirectory.appendingPathComponent("CheckLists").appendingPathExtension("json")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.clearsSelectionOnViewWillAppear = false
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableList.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return (ModelData.checkListArray.count)
@@ -38,7 +35,14 @@ class AllListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListItemList", for: indexPath)
         let item = ModelData.checkListArray[indexPath.row].name
         cell.textLabel?.text = item
-        cell.detailTextLabel?.text = "Nombre de tâches restantes"
+        if(ModelData.checkListArray[indexPath.row].remainingItems>0){
+            cell.detailTextLabel?.text = "Tâches restantes : "+String(ModelData.checkListArray[indexPath.row].remainingItems)+"✓"
+        }else if(ModelData.checkListArray[indexPath.row].items.count == 0){
+            cell.detailTextLabel?.text = "Il n'y a aucune tâche!？"
+        }
+        else{
+            cell.detailTextLabel?.text = "Aucune tâche restante!🥳"
+        }
         return cell
     }
 
@@ -76,6 +80,7 @@ extension AllListViewController:AllItemsDelegate{
         ModelData.checkListArray.append(Checklist(name: item))
         tableList.insertRows(at: [IndexPath(row: ModelData.checkListArray.count-1, section: 0)], with: .automatic)
         dismiss(animated: true, completion: nil)
+        tableList.reloadData()
         ModelData.save()
     }
     
@@ -85,6 +90,7 @@ extension AllListViewController:AllItemsDelegate{
         tableList.reloadRows(at: [IndexPath(row: indexAt, section: 0)], with: .automatic)
         tableList.endUpdates()
         dismiss(animated: true, completion: nil)
+        tableList.reloadData()
         ModelData.save()
     }
     

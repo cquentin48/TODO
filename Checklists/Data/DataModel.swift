@@ -24,14 +24,14 @@ class DataModel{
         encoder.outputFormatting = .prettyPrinted
         do{
             let jsonData = try encoder.encode(checkListArray)
-            try jsonData.write(to: AllListViewController.dataFileUrl)
+            try jsonData.write(to: DataModel.dataFileUrl)
         }
         catch{}
     }
     
     func load(){
         do{
-            let importedData = try Data(contentsOf: AllListViewController.dataFileUrl)
+            let importedData = try Data(contentsOf: DataModel.dataFileUrl)
             try checkListArray = JSONDecoder().decode([Checklist].self, from: importedData)
         }catch{
         }
