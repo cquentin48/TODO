@@ -48,13 +48,6 @@ class ChecklistViewController: UITableViewController {
         cell.initCell(inputCheckList: item)
         return cell
     }
-    @IBAction func addDummyToDo(_ sender: Any) {
-        ModelData.checkListArray[categorySelected].items.append(ChecklistItem(text: "Nouvel élément"))
-        table.beginUpdates()
-        table.insertRows(at: [
-            NSIndexPath(row: ModelData.checkListArray[categorySelected].items.count-1, section: 0) as IndexPath], with: .automatic)
-        table.endUpdates()
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
@@ -79,14 +72,6 @@ class ChecklistViewController: UITableViewController {
             table.deleteRows(at: [indexPath], with: .automatic)
             ModelData.save()
         }
-    }
-    
-    func configureCheckmark(for cell: UITableViewCell, withItem item: ChecklistItem){
-        cell.accessoryType = (item.checked) ? .checkmark : .none
-    }
-    
-    func configureText(for cell: UITableViewCell, withItem item: ChecklistItem){
-        cell.textLabel?.text = item.text
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -16,4 +16,10 @@ class Checklist : Codable{
         self.name = name
         self.items = items
     }
+    
+    var remainingItems: Int {
+        return items.filter({ (singleCheckListItem) -> Bool in
+            !singleCheckListItem.checked
+        }).count
+    }
 }
