@@ -19,7 +19,7 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
     private var rawTitle:String = ""
-    private var rawImage:IconAsset = IconAsset.NoIcon
+    private var rawImage:IconAsset = IconAsset.Folder
     
     @IBAction func onCancelActionButton(_ sender: Any) {
         delegate?.itemViewControllerDidCancel(self)
@@ -69,7 +69,7 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     fileprivate func initView() {
         if(itemToEdit == nil){
             self.title = "Nouvelle catégorie"
-            itemToEdit = Checklist(name: "Nouvelle catégorie", icon: IconAsset.NoIcon)
+            itemToEdit = Checklist(name: rawTitle, icon: rawImage)
             textInput.text = itemToEdit?.name
             categoryIcon.image = itemToEdit?.icon.image
         }else{
