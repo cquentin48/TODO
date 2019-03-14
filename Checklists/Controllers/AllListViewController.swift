@@ -38,6 +38,7 @@ class AllListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListItemList", for: indexPath)
         let item = ModelData.checkListArray[indexPath.row].name
         cell.textLabel?.text = item
+        cell.detailTextLabel?.text = "Nombre de tâches restantes"
         return cell
     }
 
