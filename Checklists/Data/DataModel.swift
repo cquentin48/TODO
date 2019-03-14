@@ -39,9 +39,17 @@ class DataModel{
     
     init(){
         load()
+        sortCheckList()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(save),
                                                 name: UIApplication.didEnterBackgroundNotification,
                                                 object: nil)
+    }
+    
+    func sortCheckList(){
+        checkListArray = checkListArray.sorted { $0.name.lowercased() < $1.name.lowercased() }
+        checkListArray.forEach { (singleCheckList) in
+            singleCheckList.items = singleCheckList.items.sorted {$0.text.lowercased() < $1.text.lowercased()}
+        }
     }
 }
