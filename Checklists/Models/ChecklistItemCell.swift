@@ -14,7 +14,6 @@ class ChecklistItemCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,5 +29,6 @@ class ChecklistItemCell: UITableViewCell {
         }else{
             isChecked.text = "𐄂"
         }
+        isChecked.textColor = self.tintColor
     }
 }
