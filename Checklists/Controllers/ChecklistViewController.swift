@@ -8,10 +8,10 @@
 
 import UIKit
 
-protocol AllItemsDelegate : class {
-    func itemViewControllerDidCancel(_ controller: ItemDetailViewController)
-    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem)
-    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem, indexAt: Int)
+protocol ItemViewDelegate : class {
+    func itemViewControllerDidCancel(_ controller: ListDetailViewController)
+    func itemDetailViewController(_ controller: ListDetailViewController, didFinishAddingItem item: [ChecklistItem])
+    func itemDetailViewController(_ controller: ListDetailViewController, didFinishEditingItem item: [ChecklistItem], indexAt: Int)
 }
 
 class ChecklistViewController: UITableViewController {
@@ -20,7 +20,7 @@ class ChecklistViewController: UITableViewController {
     @IBOutlet var table: UITableView!
     @IBOutlet weak var checkBoxLabel: UILabel!
     var rawInput:String?
-    var delegate:AllItemsDelegate?
+    var delegate:ItemViewDelegate?
     var list: Checklist!
     
     static var documentDirectory:URL {
