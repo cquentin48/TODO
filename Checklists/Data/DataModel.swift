@@ -41,11 +41,17 @@ class DataModel{
     init(){
         load()
         sortCheckList()
+        initUserDefault()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(save),
                                                 name: UIApplication.didEnterBackgroundNotification,
                                                 object: nil)
         iconListArray = initIconArrayList()
+    }
+    
+    func initUserDefault(){
+        let defaults = UserDefaults.standard
+        defaults.set(checkListArray.count == 0 && FileManager.default.fileExists(atPath: DataModel.dataFileUrl.absoluteString), forKey: "firstlaunch")
     }
     
     func sortCheckList(){
