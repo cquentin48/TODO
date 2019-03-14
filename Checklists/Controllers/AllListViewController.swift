@@ -31,10 +31,11 @@ class AllListViewController: UITableViewController {
         return (ModelData.checkListArray.count)
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListItemList", for: indexPath)
-        let item = ModelData.checkListArray[indexPath.row].name
-        cell.textLabel?.text = item
+    fileprivate func initCellIcon(_ indexPath: IndexPath, _ cell: UITableViewCell) {
+        cell.imageView?.image = ModelData.checkListArray[indexPath.row].icon.image
+    }
+    
+    fileprivate func initRemainingTasksSubTitle(_ indexPath: IndexPath, _ cell: UITableViewCell) {
         if(ModelData.checkListArray[indexPath.row].remainingItems>0){
             cell.detailTextLabel?.text = "Tâches restantes : "+String(ModelData.checkListArray[indexPath.row].remainingItems)+"✓"
         }else if(ModelData.checkListArray[indexPath.row].items.count == 0){
@@ -43,6 +44,18 @@ class AllListViewController: UITableViewController {
         else{
             cell.detailTextLabel?.text = "Aucune tâche restante!🥳"
         }
+    }
+    
+    fileprivate func initCategoryTitle(_ cell: UITableViewCell, _ item: String) {
+        cell.textLabel?.text = item
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListItemList", for: indexPath)
+        let item = ModelData.checkListArray[indexPath.row].name
+        initCategoryTitle(cell, item)
+        initCellIcon(indexPath, cell)
+        initRemainingTasksSubTitle(indexPath, cell)
         return cell
     }
 
@@ -77,7 +90,7 @@ extension AllListViewController:AllItemsDelegate{
     }
     
     func itemDetailViewController(_ controller: ListDetailViewController, didFinishAddingItem item: String) {
-        ModelData.checkListArray.append(Checklist(name: item))
+        ModelData.checkListArray.append(Checklist(name: item, icon: IconAsset.NoIcon))
         tableList.insertRows(at: [IndexPath(row: ModelData.checkListArray.count-1, section: 0)], with: .automatic)
         dismiss(animated: true, completion: nil)
         tableList.reloadData()
