@@ -11,14 +11,17 @@ import UIKit
 class AllListViewController: UITableViewController {
 
     @IBOutlet var tableList: UITableView!
-    private var checkListArray = [Checklist]()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        checkListArray.append(Checklist(name:"Birthdays"))
-        checkListArray.append(Checklist(name:"Groceries"))
-        checkListArray.append(Checklist(name:"Cool Apps"))
-        checkListArray.append(Checklist(name:"To Do"))
+    }
+    
+    static var documentDirectory:URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+    
+    static var dataFileUrl:URL {
+        return documentDirectory.appendingPathComponent("CheckLists").appendingPathExtension("json")
     }
     
     override func viewDidLoad() {
@@ -28,13 +31,12 @@ class AllListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (checkListArray.count)
+        return (ModelData.checkListArray.count)
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListItemList", for: indexPath)
-        let item = checkListArray[indexPath.row].name
+        let item = ModelData.checkListArray[indexPath.row].name
         cell.textLabel?.text = item
         return cell
     }
@@ -45,8 +47,9 @@ class AllListViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showElement" {
             let destVC = segue.destination as! ChecklistViewController
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
             destVC.delegate = self
-            destVC.checkListItemsArray = destVC.loadChecklistItems()
+            destVC.categorySelected = indexPath.row
         }else if segue.identifier == "addCategoryItem"{
             let navVC = segue.destination as! UINavigationController
             let destVC = navVC.viewControllers.first as! ListDetailViewController
@@ -56,7 +59,7 @@ class AllListViewController: UITableViewController {
             let destVC = navVC.viewControllers.first as! ListDetailViewController
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
             destVC.delegate = self
-            destVC.itemToEdit = checkListArray[indexPath.row]
+            destVC.itemToEdit = ModelData.checkListArray[indexPath.row]
             destVC.index = indexPath.row
         }
     }
@@ -69,29 +72,26 @@ extension AllListViewController:AllItemsDelegate{
     }
     
     func itemDetailViewController(_ controller: ListDetailViewController, didFinishAddingItem item: String) {
-        checkListArray.append(Checklist(name: item))
-        tableList.insertRows(at: [IndexPath(row: checkListArray.count-1, section: 0)], with: .automatic)
+        ModelData.checkListArray.append(Checklist(name: item))
+        tableList.insertRows(at: [IndexPath(row: ModelData.checkListArray.count-1, section: 0)], with: .automatic)
         dismiss(animated: true, completion: nil)
+        ModelData.save()
     }
     
     func itemDetailViewController(_ controller: ListDetailViewController, didFinishEditingItem item: String, indexAt: Int) {
         tableList.beginUpdates()
-        checkListArray[indexAt].name = item
+        ModelData.checkListArray[indexAt].name = item
         tableList.reloadRows(at: [IndexPath(row: indexAt, section: 0)], with: .automatic)
         tableList.endUpdates()
         dismiss(animated: true, completion: nil)
+        ModelData.save()
     }
     
 }
 
 extension AllListViewController:ItemViewDelegate{
-    func itemDetailViewController(_ controller: ListDetailViewController, didFinishAddingItem item: [ChecklistItem]) {
-        //Nothing
+    func saveElement(to output: ChecklistItem, At elementIndex:Int, From categoryIndex: Int) {
+        ModelData.checkListArray[categoryIndex].items[elementIndex] = output
+        ModelData.save()
     }
-    
-    func itemDetailViewController(_ controller: ListDetailViewController, didFinishEditingItem item: [ChecklistItem], indexAt: Int) {
-        //Nothing
-    }
-    
-    
 }
