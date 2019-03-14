@@ -26,14 +26,11 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     }
     @IBAction func onDoneActionButton(_ sender: Any) {
         if(textInput.text != ""){
-            if(itemToEdit == nil){
+            if(rawTitle == ""){
                 delegate?.itemDetailViewController(self, didFinishAddingItem: textInput.text!)
             }else{
                 delegate?.itemDetailViewController(self, didFinishEditingItem: textInput.text!, indexAt: index)
             }
-            
-        }else{
-            
         }
     }
     
