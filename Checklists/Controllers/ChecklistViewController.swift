@@ -14,9 +14,7 @@ protocol ItemViewDelegate : class {
 
 class ChecklistViewController: UITableViewController {
     var categorySelected: Int = 0
-    @IBOutlet weak var button: UIBarButtonItem!
     @IBOutlet var table: UITableView!
-    @IBOutlet weak var checkBoxLabel: UILabel!
     var rawInput:String?
     var delegate:ItemViewDelegate?
     var list: Checklist!

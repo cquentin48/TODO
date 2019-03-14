@@ -77,7 +77,7 @@ extension AllListViewController:AllItemsDelegate{
     }
     
     func itemDetailViewController(_ controller: ListDetailViewController, didFinishAddingItem item: String) {
-        ModelData.checkListArray.append(Checklist(name: item))
+        ModelData.checkListArray.append(Checklist(name: item, icon: IconAsset.NoIcon))
         tableList.insertRows(at: [IndexPath(row: ModelData.checkListArray.count-1, section: 0)], with: .automatic)
         dismiss(animated: true, completion: nil)
         tableList.reloadData()
