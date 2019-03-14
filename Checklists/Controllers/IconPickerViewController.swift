@@ -7,9 +7,13 @@
 //
 
 import UIKit
-
+protocol IconToChooseDelegate : class {
+    func cancel(_ controller : IconPickerViewController)
+    func updateIcon(_ controller: IconPickerViewController, didFinishAddingItem index: Int)
+}
 class IconPickerViewController: UITableViewController {
-    
+
+    var delegate:IconToChooseDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,7 +42,7 @@ class IconPickerViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "iconCell", for: indexPath)
 
         cell.textLabel?.text = ModelData.iconListArray[indexPath.row].rawValue
         cell.imageView?.image = ModelData.iconListArray[indexPath.row].image
@@ -51,6 +55,15 @@ class IconPickerViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.updateIcon(self, didFinishAddingItem: indexPath.row)
+    }
+    
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        delegate?.cancel(self)
     }
 
     /*

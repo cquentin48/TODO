@@ -14,6 +14,7 @@ class AllListViewController: UITableViewController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        print(DataModel.dataFileUrl)
     }
     
     override func viewDidLoad() {

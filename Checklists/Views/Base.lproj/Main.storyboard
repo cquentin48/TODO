@@ -147,13 +147,13 @@
         <!--Choix de l'icône-->
         <scene sceneID="qyr-5f-9mh">
             <objects>
-                <tableViewController id="CxV-QS-gLx" sceneMemberID="viewController">
+                <tableViewController id="CxV-QS-gLx" customClass="IconPickerViewController" customModule="Checklists" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bHX-J0-ocN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="h9t-Eh-w3I" style="IBUITableViewCellStyleDefault" id="DZu-dY-rC6">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="iconCell" textLabel="h9t-Eh-w3I" style="IBUITableViewCellStyleDefault" id="DZu-dY-rC6">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DZu-dY-rC6" id="wPQ-fp-xnC">
@@ -176,7 +176,13 @@
                             <outlet property="delegate" destination="CxV-QS-gLx" id="NPm-Kd-8cN"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Choix de l'icône" id="FUW-ou-98Y"/>
+                    <navigationItem key="navigationItem" title="Choix de l'icône" id="FUW-ou-98Y">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YKx-4M-8bX">
+                            <connections>
+                                <action selector="cancelAction:" destination="CxV-QS-gLx" id="mz0-NC-PCa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ptU-7d-fig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -359,7 +365,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Z3P-yg-XwS" kind="presentation" id="4rC-rj-4VY"/>
+                                            <segue destination="Z3P-yg-XwS" kind="show" identifier="chooseIcon" id="4rC-rj-4VY"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
