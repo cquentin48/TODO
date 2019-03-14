@@ -289,7 +289,7 @@
                                                         <constraint firstAttribute="width" constant="36" id="jda-MG-1e2"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icône : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJx-9P-gn6">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icône :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJx-9P-gn6">
                                                     <rect key="frame" x="16" y="11.5" width="289" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -326,6 +326,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="categoryIcon" destination="LJ0-2f-pA3" id="BQP-ZJ-CXA"/>
                         <outlet property="textInput" destination="yM2-mL-YUv" id="v3X-06-dPi"/>
                     </connections>
                 </tableViewController>

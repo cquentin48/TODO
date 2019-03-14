@@ -14,6 +14,7 @@ protocol AllItemsDelegate : class {
 }
 class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var categoryIcon: UIImageView!
     @IBOutlet weak var textInput: UITextField!
     @IBAction func onCancelActionButton(_ sender: Any) {
         delegate?.itemViewControllerDidCancel(self)
