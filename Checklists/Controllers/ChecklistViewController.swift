@@ -21,6 +21,7 @@ class ChecklistViewController: UITableViewController {
     @IBOutlet weak var checkBoxLabel: UILabel!
     var rawInput:String?
     var delegate:AllItemsDelegate?
+    var list: Checklist!
     
     static var documentDirectory:URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -43,15 +44,14 @@ class ChecklistViewController: UITableViewController {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        loadChecklistItems()
     }
     
-    func loadChecklistItems(){
+    func loadChecklistItems() -> [ChecklistItem]{
         do{
             let importedData = try Data(contentsOf: ChecklistViewController.dataFileUrl)
-            checkListItemsArray = try JSONDecoder().decode([ChecklistItem].self, from: importedData)
+            return try JSONDecoder().decode([ChecklistItem].self, from: importedData)
         }catch{
-            
+            return []
         }
         
     }

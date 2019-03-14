@@ -47,6 +47,7 @@ class AllListViewController: UITableViewController {
         if segue.identifier == "showElement" {
             let destVC = segue.destination as! ChecklistViewController
             destVC.delegate = self
+            destVC.checkListItemsArray = destVC.loadChecklistItems()
         }
     }
  
