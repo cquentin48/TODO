@@ -110,7 +110,7 @@ class ChecklistViewController: UITableViewController {
         if editingStyle == .delete {
             checkListItemsArray.remove(at: indexPath.row)
             table.deleteRows(at: [indexPath], with: .automatic)
-            saveChecklistItems()
+            //saveChecklistItems()
         }
     }
     
@@ -131,7 +131,7 @@ class ChecklistViewController: UITableViewController {
 extension ChecklistViewController:ItemDetailViewControllerDelegate{
     func itemViewControllerDidCancel(_ controller: ItemDetailViewController) {
         dismiss(animated: true, completion: nil)
-        saveChecklistItems()
+        //saveChecklistItems()
     }
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem) {
@@ -140,7 +140,7 @@ extension ChecklistViewController:ItemDetailViewControllerDelegate{
         table.insertRows(at: [IndexPath(row: checkListItemsArray.count-1, section: 0)], with: .automatic)
         table.endUpdates()
         dismiss(animated: true, completion: nil)
-        saveChecklistItems()
+        //saveChecklistItems()
     }
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem, indexAt:Int){
@@ -150,6 +150,6 @@ extension ChecklistViewController:ItemDetailViewControllerDelegate{
         table.reloadRows(at: [IndexPath(row: indexAt, section: 0)], with: .automatic)
         table.endUpdates()
         dismiss(animated: true, completion: nil)
-        saveChecklistItems()
+        //saveChecklistItems()
     }
 }
