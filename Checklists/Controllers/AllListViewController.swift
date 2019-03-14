@@ -15,14 +15,38 @@ class AllListViewController: UITableViewController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        checkListArray.append(Checklist(name:"Birthdays"))
-        checkListArray.append(Checklist(name:"Groceries"))
-        checkListArray.append(Checklist(name:"Cool Apps"))
-        checkListArray.append(Checklist(name:"To Do"))
-        
-        checkListArray.forEach { (it) in
-            it.items.append(ChecklistItem(text: "New Element", checked: false))
+        checkListArray = loadChecklistItems()
+        print(AllListViewController.documentDirectory.path)
+        print(AllListViewController.dataFileUrl.path)
+    }
+    
+    static var documentDirectory:URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+    
+    static var dataFileUrl:URL {
+        return documentDirectory.appendingPathComponent("CheckLists").appendingPathExtension("json")
+    }
+    
+    
+    func loadChecklistItems() -> [Checklist]{
+        do{
+            let importedData = try Data(contentsOf: AllListViewController.dataFileUrl)
+            return try JSONDecoder().decode([Checklist].self, from: importedData)
+        }catch{
+            return []
         }
+        
+    }
+    
+    func saveChecklistItems(){
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        do{
+            let jsonData = try encoder.encode(checkListArray)
+            try jsonData.write(to: AllListViewController.dataFileUrl)
+        }
+        catch{}
     }
     
     override func viewDidLoad() {
@@ -50,6 +74,7 @@ class AllListViewController: UITableViewController {
             let destVC = segue.destination as! ChecklistViewController
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
             destVC.delegate = self
+            destVC.categorySelected = indexPath.row
             destVC.checkListItemsArray = checkListArray[indexPath.row].items
         }else if segue.identifier == "addCategoryItem"{
             let navVC = segue.destination as! UINavigationController
@@ -76,6 +101,7 @@ extension AllListViewController:AllItemsDelegate{
         checkListArray.append(Checklist(name: item))
         tableList.insertRows(at: [IndexPath(row: checkListArray.count-1, section: 0)], with: .automatic)
         dismiss(animated: true, completion: nil)
+        saveChecklistItems()
     }
     
     func itemDetailViewController(_ controller: ListDetailViewController, didFinishEditingItem item: String, indexAt: Int) {
@@ -84,18 +110,14 @@ extension AllListViewController:AllItemsDelegate{
         tableList.reloadRows(at: [IndexPath(row: indexAt, section: 0)], with: .automatic)
         tableList.endUpdates()
         dismiss(animated: true, completion: nil)
+        saveChecklistItems()
     }
     
 }
 
 extension AllListViewController:ItemViewDelegate{
-    func itemDetailViewController(_ controller: ListDetailViewController, didFinishAddingItem item: [ChecklistItem]) {
-        //Nothing
+    func saveElement(to output: ChecklistItem, At elementIndex:Int, From categoryIndex: Int) {
+        checkListArray[categoryIndex].items[elementIndex] = output
+        saveChecklistItems()
     }
-    
-    func itemDetailViewController(_ controller: ListDetailViewController, didFinishEditingItem item: [ChecklistItem], indexAt: Int) {
-        //Nothing
-    }
-    
-    
 }

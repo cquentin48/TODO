@@ -9,13 +9,12 @@
 import UIKit
 
 protocol ItemViewDelegate : class {
-    func itemViewControllerDidCancel(_ controller: ListDetailViewController)
-    func itemDetailViewController(_ controller: ListDetailViewController, didFinishAddingItem item: [ChecklistItem])
-    func itemDetailViewController(_ controller: ListDetailViewController, didFinishEditingItem item: [ChecklistItem], indexAt: Int)
+    func saveElement(to output:ChecklistItem, At elementIndex:Int, From categoryIndex: Int)
 }
 
 class ChecklistViewController: UITableViewController {
     var checkListItemsArray: [ChecklistItem] = []
+    var categorySelected: Int = 0
     @IBOutlet weak var button: UIBarButtonItem!
     @IBOutlet var table: UITableView!
     @IBOutlet weak var checkBoxLabel: UILabel!
@@ -23,37 +22,8 @@ class ChecklistViewController: UITableViewController {
     var delegate:ItemViewDelegate?
     var list: Checklist!
     
-    static var documentDirectory:URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    }
-    
-    static var dataFileUrl:URL {
-        return documentDirectory.appendingPathComponent("CheckLists").appendingPathExtension("json")
-    }
-    
-    func saveChecklistItems(){
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        
-        do{
-            let jsonData = try encoder.encode(checkListItemsArray)
-            try jsonData.write(to: ChecklistViewController.dataFileUrl)
-        }
-        catch{}
-    }
-    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-    }
-    
-    func loadChecklistItems() -> [ChecklistItem]{
-        do{
-            let importedData = try Data(contentsOf: ChecklistViewController.dataFileUrl)
-            return try JSONDecoder().decode([ChecklistItem].self, from: importedData)
-        }catch{
-            return []
-        }
-        
     }
     
     func getElementByInputText(inputElement: ChecklistItem)-> Int{
@@ -67,8 +37,6 @@ class ChecklistViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(ChecklistViewController.documentDirectory.path)
-        print(ChecklistViewController.dataFileUrl.path)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -110,7 +78,6 @@ class ChecklistViewController: UITableViewController {
         if editingStyle == .delete {
             checkListItemsArray.remove(at: indexPath.row)
             table.deleteRows(at: [indexPath], with: .automatic)
-            //saveChecklistItems()
         }
     }
     
@@ -150,6 +117,6 @@ extension ChecklistViewController:ItemDetailViewControllerDelegate{
         table.reloadRows(at: [IndexPath(row: indexAt, section: 0)], with: .automatic)
         table.endUpdates()
         dismiss(animated: true, completion: nil)
-        //saveChecklistItems()
+        delegate?.saveElement(to: item, At: indexAt, From: categorySelected)
     }
 }
