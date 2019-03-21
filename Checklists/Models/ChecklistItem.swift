@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 class ChecklistItem : Codable {
     var text:String
@@ -29,6 +30,28 @@ class ChecklistItem : Codable {
         self.dueDate = dueDate
         self.shouldRemind = shouldRemind
         self.itemId = itemId
+    }
+    
+    func scheduleNotification(){
+        let center = UNUserNotificationCenter.current()
+        center.removeAllDeliveredNotifications()
+        center.add(UNNotificationRequest(identifier: String(itemId ?? 0)+text,
+                                         content: createNotificationContent(),
+                                         trigger:UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)),
+                   withCompletionHandler: nil)
+    }
+    
+    func getDateFormat()->String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, YYYY, hh:mm a"
+        return dateFormatter.string(from: dueDate)
+    }
+    
+    func createNotificationContent()->UNMutableNotificationContent{
+        let content = UNMutableNotificationContent()
+        content.title = "Tâche à faire : "+text
+        content.body = "Date limite :"+getDateFormat()
+        return content
     }
     
     func toggleChecked(){

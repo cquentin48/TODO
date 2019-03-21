@@ -101,7 +101,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
-                                                        <action selector="done:" destination="g91-bA-kmS" eventType="editingDidEndOnExit" id="7cH-M9-a7k"/>
+                                                        <action selector="endKeyboardEditing:" destination="g91-bA-kmS" eventType="editingDidEnd" id="cwb-ka-jP1"/>
                                                         <action selector="keyboard:" destination="g91-bA-kmS" eventType="editingDidBegin" id="I2d-TN-f77"/>
                                                     </connections>
                                                 </textField>

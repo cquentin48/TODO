@@ -62,6 +62,10 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         addDelegateForTextInput()
     }
     
+    @IBAction func endKeyboardEditing(_ sender: Any) {
+        textInput.resignFirstResponder()
+        isKeyboardDisplayed = false
+    }
     
     @IBAction func keyboard(_ sender: Any) {
         isKeyboardDisplayed = true
@@ -171,8 +175,16 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func done(_ sender: Any) {
-        textInput.resignFirstResponder()
-        isKeyboardDisplayed = false
+        if(textInput.text != ""){
+            if(itemToEdit == nil){
+                delegate?.itemDetailViewController(self, didFinishAddingItem: ChecklistItem(text: textInput.text!))
+            }else{
+                delegate?.itemDetailViewController(self, didFinishEditingItem: ChecklistItem(text: textInput.text!,checked: (itemToEdit?.checked)!), indexAt: index)
+            }
+            
+        }else{
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
