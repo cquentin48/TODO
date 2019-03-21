@@ -102,6 +102,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <action selector="done:" destination="g91-bA-kmS" eventType="editingDidEndOnExit" id="7cH-M9-a7k"/>
+                                                        <action selector="keyboard:" destination="g91-bA-kmS" eventType="editingDidBegin" id="I2d-TN-f77"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -167,7 +168,7 @@
                                                     <rect key="frame" x="315" y="12" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -508,7 +509,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="GPR-dS-dO2"/>
-        <segue reference="bfT-Bl-QKB"/>
+        <segue reference="Mg1-4n-zbz"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

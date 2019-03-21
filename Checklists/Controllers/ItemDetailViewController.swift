@@ -26,6 +26,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     private var isDatePickerVisible = false
     @IBOutlet var dateCell: UITableViewCell!
     @IBOutlet weak var datePicker: UIDatePicker!
+    private var isKeyboardDisplayed: Bool = false
     
     var index:Int = 0
     
@@ -61,6 +62,14 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         addDelegateForTextInput()
     }
     
+    
+    @IBAction func keyboard(_ sender: Any) {
+        isKeyboardDisplayed = true
+        if(tableView.numberOfRows(inSection: 1) == 3){
+            hideDatePicker()
+        }
+    }
+    
     func initSwitchStatus(){
         shouldRemindSwitch.isOn = !(itemToEdit?.checked ?? true)
     }
@@ -79,7 +88,11 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 1){
-            return (isDatePickerVisible) ? 3 : 2
+            if(isKeyboardDisplayed){
+                return 2
+            }else{
+                return (isDatePickerVisible) ? 3 : 2
+            }
         }else{
             return super.tableView(tableView, numberOfRowsInSection: section)
         }
@@ -103,7 +116,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.delegate = self
         tableView.dataSource = self
-        if(indexPath.row == 1 && indexPath.section == 1){
+        if(!isKeyboardDisplayed && indexPath.row == 1 && indexPath.section == 1){
             if(isDatePickerVisible){
                 hideDatePicker()
             }else{
@@ -158,16 +171,8 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func done(_ sender: Any) {
-        if(textInput.text != ""){
-            if(itemToEdit == nil){
-                delegate?.itemDetailViewController(self, didFinishAddingItem: ChecklistItem(text: textInput.text!))
-            }else{
-                delegate?.itemDetailViewController(self, didFinishEditingItem: ChecklistItem(text: textInput.text!,checked: (itemToEdit?.checked)!), indexAt: index)
-            }
-
-        }else{
-            
-        }
+        textInput.resignFirstResponder()
+        isKeyboardDisplayed = false
     }
     
     override func viewWillAppear(_ animated: Bool) {

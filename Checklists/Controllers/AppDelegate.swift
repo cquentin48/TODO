@@ -20,12 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         // Request permission to display alerts and play sounds.
         center.requestAuthorization(options: [.alert, .sound])
         { (granted, error) in
-            if(!granted){
-                print("Error : "+error.debugDescription)
-                self.displayAlert(title: "Error", message: "In order to use this app, you must enable notification permission. This application will close.", textButton: "Ok")
-                exit(EXIT_FAILURE)
+            if(error != nil){
+                print("Ok")
             }else{
-                self.displayAlert(title: "Success", message: "With this application you'll be able to manage check list", textButton: "Ok")
+                print("Error")
             }
         }
     }
@@ -35,11 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         content.title = "Weekly Staff Meeting"
         content.body = "Every Tuesday at 2pm"
         
-        var dateComponents = DateComponents()
-        dateComponents.calendar = Calendar.current
-        dateComponents.weekday = 4
-        dateComponents.hour = 9
-        dateComponents.minute = 30
+        let notifDate = Date(timeIntervalSinceNow: 10)
+        
+        let dateComponents = Calendar.current.dateComponents([.hour,.minute,.second,.day,.month,.year], from: notifDate)
+        
         
         // Create the trigger as a repeating event.
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
@@ -57,9 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         }
     }
     
-    func displayAlert(title:String, message:String, textButton:String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: textButton, style: .cancel, handler: nil))
+    func displayAlert(title:String, message:String, viewController:UIViewController){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel)
+            alert.addAction(cancelAction)
+            viewController.present(alert, animated: true, completion: nil)
+        }
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
