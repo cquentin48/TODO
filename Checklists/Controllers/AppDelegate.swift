@@ -30,6 +30,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func displayNotification(){
+        let content = UNMutableNotificationContent()
+        content.title = "Weekly Staff Meeting"
+        content.body = "Every Tuesday at 2pm"
+        
+        var dateComponents = DateComponents()
+        dateComponents.calendar = Calendar.current
+        dateComponents.weekday = 4
+        dateComponents.hour = 9
+        dateComponents.minute = 30
+        
+        // Create the trigger as a repeating event.
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        
+        let uuidString = UUID().uuidString
+        let request = UNNotificationRequest(identifier: uuidString,
+                                            content: content, trigger: trigger)
+        
+        // Schedule the request with the system.
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(request) { (error) in
+            if error != nil {
+                print(error.debugDescription)
+            }
+        }
+    }
+    
     func displayAlert(title:String, message:String, textButton:String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: textButton, style: .cancel, handler: nil))
@@ -54,6 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         print("Application devenu active")
+        displayNotification()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
