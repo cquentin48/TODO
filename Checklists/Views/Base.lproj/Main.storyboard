@@ -193,6 +193,8 @@
                     <connections>
                         <outlet property="cancelButton" destination="YSE-s0-xkU" id="0wB-JJ-PPb"/>
                         <outlet property="doneButton" destination="Ogv-FR-6P2" id="0Kh-9M-3xQ"/>
+                        <outlet property="dueDateLabel" destination="kUg-x5-01b" id="IAg-SI-oNr"/>
+                        <outlet property="shouldRemindSwitch" destination="7Dk-kN-yTL" id="d7J-k6-TXD"/>
                         <outlet property="textInput" destination="trf-BH-vh0" id="gH6-S9-rWz"/>
                     </connections>
                 </tableViewController>
