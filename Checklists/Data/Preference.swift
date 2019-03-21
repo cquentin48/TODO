@@ -13,4 +13,8 @@ class Preference{
     func nextChecklistItemID() -> Int {
         return UserDefaults.standard.integer(forKey: "checklistItemID")
     }
+    
+    var firstlaunch = {
+        return UserDefaults.standard.object(forKey: "firstLaunch") != nil
+    }
 }
