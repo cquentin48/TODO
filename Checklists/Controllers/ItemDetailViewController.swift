@@ -34,6 +34,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         initStateForBarButtons()
         updateButtonBarStatus()
         loadRemindDate()
+        initSwitchStatus()
     }
     
     func loadRemindDate(){
@@ -46,6 +47,14 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         textInput.text = ""
         doneButton.isEnabled = false
         addDelegateForTextInput()
+    }
+    
+    func initSwitchStatus(){
+        shouldRemindSwitch.isOn = !(itemToEdit?.checked ?? true)
+    }
+    
+    @IBAction func switchStatusUpdated(_ sender: Any) {
+        itemToEdit?.checked = !(shouldRemindSwitch.isOn)
     }
     
     @objc func updateButtonBarStatus(){
