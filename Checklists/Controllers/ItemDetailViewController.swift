@@ -81,6 +81,12 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             return nil
         }
     }
+    @IBAction func dateChanged(_ sender: Any) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, YYYY, hh:mm a"
+        let date = sender as! UIDatePicker
+        dueDateLabel.text = dateFormatter.string(from: date.date)
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
