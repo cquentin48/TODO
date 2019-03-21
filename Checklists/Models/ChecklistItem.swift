@@ -20,6 +20,7 @@ class ChecklistItem : Codable {
         self.checked = checked
         self.dueDate = dueDate
         self.shouldRemind = shouldRemind
+        self.itemId = preference.nextChecklistItemID()
     }
     
     public init(text:String, checked:Bool = false, shouldRemind:Bool, dueDate:Date, itemId:Int){
