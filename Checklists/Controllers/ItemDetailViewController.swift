@@ -38,6 +38,15 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         updateButtonBarStatus()
         loadRemindDate()
         initSwitchStatus()
+        initTextColor()
+    }
+    
+    func initTextColor(){
+        if(!isDatePickerVisible){
+            dueDateLabel.textColor = UIColor.darkGray
+        }else{
+            dueDateLabel.textColor = self.view.tintColor
+        }
     }
     
     func loadRemindDate(){
@@ -58,11 +67,13 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     func hideDatePicker(){
         isDatePickerVisible = false
+        initTextColor()
         tableView.deleteRows(at: [IndexPath(row: 2, section: 1)], with: .automatic)
     }
     
     func showDatePicker(){
         isDatePickerVisible = true
+        initTextColor()
         tableView.insertRows(at: [IndexPath(row: 2, section: 1)], with: .automatic)
     }
     
