@@ -13,9 +13,16 @@ class ChecklistItem : Codable {
     var checked:Bool
     var dueDate:Date
     var shouldRemind:Bool
-    var itemId:Int
+    var itemId:Int?
     
-    public init(text:String, checked:Bool = false, dueDate:Date=Date.init(timeIntervalSinceNow: 0), shouldRemind:Bool=false, itemId:Int=0){
+    public init(text:String, checked:Bool = false, dueDate:Date=Date.init(timeIntervalSinceNow: 0), shouldRemind:Bool=false){
+        self.text = text
+        self.checked = checked
+        self.dueDate = dueDate
+        self.shouldRemind = shouldRemind
+    }
+    
+    public init(text:String, checked:Bool = false, shouldRemind:Bool, dueDate:Date, itemId:Int){
         self.text = text
         self.checked = checked
         self.dueDate = dueDate
