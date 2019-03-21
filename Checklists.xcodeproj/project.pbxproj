@@ -17,6 +17,7 @@
 		08C868A5223A89C600177881 /* IconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C868A4223A89C600177881 /* IconPickerViewController.swift */; };
 		08C868A8223AB65C00177881 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C868A7223AB65C00177881 /* UserNotifications.framework */; };
 		08E0E0682243924300E2C246 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0E0672243924300E2C246 /* Preference.swift */; };
+		08E0E06A224396AC00E2C246 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0E069224396AC00E2C246 /* UserDefaultsKeys.swift */; };
 		08E733892215998000500167 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E733882215998000500167 /* AppDelegate.swift */; };
 		08E7338B2215998000500167 /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7338A2215998000500167 /* ChecklistViewController.swift */; };
 		08E733902215998200500167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08E7338F2215998200500167 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		08C868A4223A89C600177881 /* IconPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerViewController.swift; sourceTree = "<group>"; };
 		08C868A7223AB65C00177881 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		08E0E0672243924300E2C246 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
+		08E0E069224396AC00E2C246 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		08E733852215998000500167 /* Checklists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checklists.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08E733882215998000500167 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08E7338A2215998000500167 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				08C8689A223A557200177881 /* DataModel.swift */,
 				08C8689F223A7E5000177881 /* IconAsset.swift */,
 				08E0E0672243924300E2C246 /* Preference.swift */,
+				08E0E069224396AC00E2C246 /* UserDefaultsKeys.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 			files = (
 				086E4650221EFC56002FCFA1 /* AllListViewController.swift in Sources */,
 				086E464C221EA839002FCFA1 /* ChecklistItemCell.swift in Sources */,
+				08E0E06A224396AC00E2C246 /* UserDefaultsKeys.swift in Sources */,
 				08E7338B2215998000500167 /* ChecklistViewController.swift in Sources */,
 				08E733A22215A21900500167 /* ChecklistItem.swift in Sources */,
 				08E733A42215B7DC00500167 /* ItemDetailViewController.swift in Sources */,
