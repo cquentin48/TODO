@@ -25,6 +25,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     private var dueDate = Date()
     private var isDatePickerVisible = false
     @IBOutlet var dateCell: UITableViewCell!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     var index:Int = 0
     
@@ -37,20 +38,6 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         updateButtonBarStatus()
         loadRemindDate()
         initSwitchStatus()
-    }
-    
-    func showDatePicker(){
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: 2, section: 1)], with: .automatic)
-        tableView.endUpdates()
-        print("Activation du date picker")
-    }
-    
-    func hideDatePicker(){
-        tableView.beginUpdates()
-        tableView.deleteRows(at: [IndexPath(row: 2, section: 1)], with: .automatic)
-        tableView.endUpdates()
-        print("Désactivation du date picker")
     }
     
     func loadRemindDate(){
@@ -69,21 +56,51 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         shouldRemindSwitch.isOn = !(itemToEdit?.checked ?? true)
     }
     
+    func hideDatePicker(){
+        isDatePickerVisible = false
+        tableView.deleteRows(at: [IndexPath(row: 2, section: 1)], with: .automatic)
+    }
+    
+    func showDatePicker(){
+        isDatePickerVisible = true
+        tableView.insertRows(at: [IndexPath(row: 2, section: 1)], with: .automatic)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 1){
-            return (shouldRemindSwitch.isEnabled) ? 3 : 2
+            return (isDatePickerVisible) ? 3 : 2
         }else{
             return super.tableView(tableView, numberOfRowsInSection: section)
         }
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if(indexPath.row == 0 && indexPath.section == 0){
-            tableView.cellForRow(at: indexPath)?.isEditing = true
+        if(indexPath.row == 1 && indexPath.section == 1){
+            return indexPath
         }else{
-            tableView.cellForRow(at: indexPath)?.isEditing = false
+            return nil
         }
-        return indexPath
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.delegate = self
+        tableView.dataSource = self
+        if(indexPath.row == 1 && indexPath.section == 1){
+            if(isDatePickerVisible){
+                hideDatePicker()
+            }else{
+                showDatePicker()
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+        if(indexPath.row == 2 && indexPath.section == 1){
+            return super.tableView(tableView, indentationLevelForRowAt: IndexPath(row: 1, section: 1))
+        }else{
+            return super.tableView(tableView, indentationLevelForRowAt: indexPath)
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,7 +113,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(indexPath.row == 2 && indexPath.section == 1){
-            return dateCell.intrinsicContentSize.height+1
+            return datePicker.intrinsicContentSize.height+1
         }else{
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
@@ -104,11 +121,6 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func switchStatusUpdated(_ sender: Any) {
         itemToEdit?.checked = !(shouldRemindSwitch.isOn)
-        if(shouldRemindSwitch.isOn){
-            showDatePicker()
-        }else{            
-            hideDatePicker()
-        }
     }
     
     @objc func updateButtonBarStatus(){
@@ -142,6 +154,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         if let itemToEdit = itemToEdit {
             //Mode edition
             textInput.text = itemToEdit.text
