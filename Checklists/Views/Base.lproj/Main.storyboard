@@ -93,7 +93,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of the item" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="trf-BH-vh0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="50.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="319" height="50.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="lWW-Sd-zvA"/>
                                                     </constraints>
@@ -107,7 +107,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="trf-BH-vh0" firstAttribute="top" secondItem="bdV-33-8Cy" secondAttribute="top" id="GXz-0w-1bl"/>
-                                                <constraint firstItem="trf-BH-vh0" firstAttribute="leading" secondItem="bdV-33-8Cy" secondAttribute="leading" id="JuU-ji-oLy"/>
+                                                <constraint firstItem="trf-BH-vh0" firstAttribute="leading" secondItem="bdV-33-8Cy" secondAttribute="leading" constant="16" id="JuU-ji-oLy"/>
                                                 <constraint firstAttribute="bottom" secondItem="trf-BH-vh0" secondAttribute="bottom" id="Uhu-Vj-0ng"/>
                                                 <constraint firstAttribute="trailing" secondItem="trf-BH-vh0" secondAttribute="trailing" id="puI-NG-fHG"/>
                                                 <constraint firstAttribute="bottom" secondItem="trf-BH-vh0" secondAttribute="bottom" id="xoh-AM-dE2"/>
@@ -195,6 +195,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cancelButton" destination="YSE-s0-xkU" id="0wB-JJ-PPb"/>
+                        <outlet property="dateCell" destination="KMG-70-CiZ" id="gUj-YW-JwS"/>
                         <outlet property="doneButton" destination="Ogv-FR-6P2" id="0Kh-9M-3xQ"/>
                         <outlet property="dueDateLabel" destination="kUg-x5-01b" id="IAg-SI-oNr"/>
                         <outlet property="shouldRemindSwitch" destination="7Dk-kN-yTL" id="d7J-k6-TXD"/>
@@ -202,6 +203,28 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O3n-l7-JT3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="162" id="KMG-70-CiZ">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KMG-70-CiZ" id="11a-yQ-Fc1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="161.5"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ka1-aZ-ROe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="161.5"/>
+                                <date key="date" timeIntervalSinceReferenceDate="574859035.59076297">
+                                    <!--2019-03-21 11:03:55 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Ka1-aZ-ROe" secondAttribute="bottom" id="Kvr-0S-ssZ"/>
+                            <constraint firstItem="Ka1-aZ-ROe" firstAttribute="top" secondItem="11a-yQ-Fc1" secondAttribute="top" id="MS9-pH-v73"/>
+                            <constraint firstItem="Ka1-aZ-ROe" firstAttribute="leading" secondItem="11a-yQ-Fc1" secondAttribute="leading" id="ZCP-pc-9q4"/>
+                            <constraint firstAttribute="trailing" secondItem="Ka1-aZ-ROe" secondAttribute="trailing" id="p9y-nq-Lde"/>
+                        </constraints>
+                    </tableViewCellContentView>
+                </tableViewCell>
             </objects>
             <point key="canvasLocation" x="1216.8" y="25.637181409295355"/>
         </scene>
