@@ -33,6 +33,13 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         initStateForBarButtons()
         updateButtonBarStatus()
+        loadRemindDate()
+    }
+    
+    func loadRemindDate(){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, YYYY, hh:mm a"
+        dueDateLabel.text = dateFormatter.string(from: itemToEdit?.dueDate ?? Date())
     }
     
     func initStateForBarButtons(){
@@ -65,7 +72,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             }else{
                 delegate?.itemDetailViewController(self, didFinishEditingItem: ChecklistItem(text: textInput.text!,checked: (itemToEdit?.checked)!), indexAt: index)
             }
-            
+
         }else{
             
         }
